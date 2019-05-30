@@ -132,7 +132,7 @@ void VideoViewer::Run()
 {	
 	ReadM3U8();		// parse preliminary
 	// successful - send the response to TV
-	VideoStream << "HTTP/1.1 200 OK\nServer: hlspxd\nContent-Type: application/octet-stream\nConnection : close\n\n";
+	VideoStream << "HTTP/1.1 200 OK\r\nServer: hlspxd\r\nContent-Type: application/octet-stream\r\nConnection : close\r\n\r\n";
 	VideoStream.flush();
 
 	if (httpReqMethod == "HEAD" || httpReqMethod == "head")
