@@ -76,6 +76,7 @@ class VideoViewer
 {
 	socketstream VideoStream;			// output stream
 	VideoQuality SessionQuality;		// video quality
+	std::string httpReqMethod;			// HTTP request method
 	Uri VideoUri;						// current URI
 	HttpClient M3U8Client;				// content server session
 	char TsBuf[TS_BUF_LEN];				// output buffer

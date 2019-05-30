@@ -314,9 +314,11 @@ public:
 class HttpRequest : public HttpMessage
 {
 	static std::regex reqRx;
+	std::string _method;
 	std::string _path;
 public:
 	HttpRequest(std::istream& stream);
+	inline std::string &getMethod(){ return _method; }
 	inline std::string &getPath(){ return _path; }
 };
 

@@ -212,7 +212,7 @@ const std::string *HttpMessage::getHeaderRecord(std::string key)
 	return &(it->second);
 }
 
-std::regex HttpRequest::reqRx("(GET|get)[[:space:]]+([^[:space:]]+)[[:space:]]+(.+)");
+std::regex HttpRequest::reqRx("(GET|get|HEAD|head)[[:space:]]+([^[:space:]]+)[[:space:]]+(.+)");
 
 HttpRequest::HttpRequest(istream& stream)
 {
@@ -227,6 +227,7 @@ HttpRequest::HttpRequest(istream& stream)
 
 	if (!regex_search(inStr.c_str(), res, reqRx)) throw Exception("bad request");
 
+	_method = res[1].str();
 	_path = res[2].str();
 
 	HttpMessage::init(stream);

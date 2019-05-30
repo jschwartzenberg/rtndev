@@ -25,6 +25,7 @@ VideoViewer::VideoViewer(SOCKET ClientSocket)
 	HttpRequest req(VideoStream);
 
 	string reqStr;
+	Uri::decode(req.getMethod(), httpReqMethod);
 	Uri::decode(req.getPath(), reqStr);
 
 	string reqUri = reqStr;
@@ -133,6 +134,11 @@ void VideoViewer::Run()
 	// successful - send the response to TV
 	VideoStream << "HTTP/1.1 200 OK\nServer: hlspxd\nContent-Type: application/octet-stream\nConnection : close\n\n";
 	VideoStream.flush();
+
+	if (httpReqMethod == "HEAD" || httpReqMethod == "head")
+	{
+		return;
+	}
 
 	// find redirections to different resolutions
 	vector<StreamInf> streamVec;
