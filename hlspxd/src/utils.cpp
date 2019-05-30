@@ -465,8 +465,8 @@ HttpResponse HttpClient::getResponse(Uri &reqUri)
 	{
 		connect2Host(reqUri);
 
-		_sockstream << "GET /" << reqUri.getPath() << " HTTP/1.1\nHost: " << reqUri.getHost()
-			<< "\nUser-agent: hlspxd\nAccept: */*\nConnection: close\n\n";
+		_sockstream << "GET /" << reqUri.getPath() << " HTTP/1.1\r\nHost: " << reqUri.getHost()
+			<< "\r\nUser-agent: hlspxd\r\nAccept: */*\r\nConnection: close\r\n\r\n";
 		_sockstream.flush();
 
 		contResp = HttpResponse(_sockstream);
