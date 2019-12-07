@@ -481,7 +481,8 @@ HttpResponse HttpClient::getResponse(Uri &reqUri)
 			const string *Location = contResp.getHeaderRecord("Location");
 			if (Location == NULL) throw Exception("Redirect - no location");
 			clientUri = Uri(*Location);
-			if (clientUri.isRelative()) throw Exception("Relative redirection not implemented 1");
+			if (clientUri.isRelative())
+				clientUri = Uri(reqUri.getHost(), clientUri.getPort(), Location->c_str());
 			LogWriter::WriteLog("Redirect ->'%s'", Location->c_str());
 			reqUri = clientUri;
 		}

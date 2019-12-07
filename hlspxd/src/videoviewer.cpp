@@ -116,8 +116,12 @@ void VideoViewer::ReadM3U8()
 		{
 			if (mavec[17].matched)
 				recrd.TsUri = Uri(mavec[17].str(), (mavec[19].matched) ? mavec[19].str() : "", mavec[20].str());
-			else
-				recrd.TsUri = Uri(VideoUri, mavec[20].str());
+			else {
+				if (mavec[15].str().at(0) == '/')
+					recrd.TsUri = Uri(VideoUri.getHost(), VideoUri.getPort(), mavec[15].str());
+				else
+					recrd.TsUri = Uri(VideoUri, mavec[20].str());
+			}
 		}
 
 		PlayList.push_back(recrd);
